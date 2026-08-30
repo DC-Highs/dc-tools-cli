@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest"
-import { createProgram } from "../src/index.js"
+
 import { DragonStaticFileUrlParser } from "@dchighs/dc-core"
+
+import { createProgram } from "../src/index.js"
 
 describe("CLI Commands Structure", () => {
     it("should initialize program with subcommands", () => {

@@ -31,6 +31,10 @@ export function logInfo(message: string): void {
     logger.info(`ℹ ${message}`)
 }
 
+export function logWarning(message: string): void {
+    logger.warn(`⚠ ${message}`)
+}
+
 export function logError(message: string, error?: unknown): void {
     if (error instanceof Error) {
         logger.error(`✖ ${message}`, { stack: error.stack })

@@ -7,7 +7,7 @@ import { DragonPhase } from "@dchighs/dc-core"
 import { ensureDirectory } from "../../helpers/fs.js"
 import { logError, logInfo, logSuccess } from "../../helpers/logger.js"
 
-export const dragonAllCommand = new Command("dragon-all")
+export const dragonAllCommand = new Command("dragon:all")
     .description("Find and download all asset files (sprite, thumbnail, flash, spine) for a dragon")
     .argument("[imageName]", "Dragon image name (e.g. 1000_dragon_nature)")
     .option("-i, --image-name <name>", "Dragon image name")

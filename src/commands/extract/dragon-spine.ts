@@ -4,8 +4,7 @@ import { DragonStaticFileUrlParser } from "@dchighs/dc-core"
 
 import { formatExtractedMetadata, logCard, logError } from "../../helpers/logger.js"
 
-export const extractDragonSpineCommand = new Command("dragon-spine")
-    .alias("d-spine")
+export const extractDragonSpineCommand = new Command("dragon-animation:spine")
     .description("Extract data from a dragon spine animation URL")
     .argument("<url>", "Dragon spine animation URL")
     .action((url: string) => {

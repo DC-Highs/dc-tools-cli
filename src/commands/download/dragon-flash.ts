@@ -6,7 +6,7 @@ import { DragonPhase } from "@dchighs/dc-core"
 import { ensureDirectory } from "../../helpers/fs.js"
 import { logError, logSuccess } from "../../helpers/logger.js"
 
-export const dragonFlashCommand = new Command("dragon-flash")
+export const dragonFlashCommand = new Command("dragon-animation:flash")
     .description("Download dragon flash animation (.swf)")
     .argument("[imageName]", "Dragon image name (e.g. 1000_dragon_nature)")
     .option("-i, --image-name <name>", "Dragon image name")

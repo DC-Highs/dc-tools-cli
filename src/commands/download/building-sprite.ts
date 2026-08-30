@@ -6,7 +6,7 @@ import { BuildingSpriteQuality } from "@dchighs/dc-core"
 import { ensureDirectory } from "../../helpers/fs.js"
 import { logError, logSuccess } from "../../helpers/logger.js"
 
-export const buildingSpriteCommand = new Command("building-sprite")
+export const buildingSpriteCommand = new Command("building:sprite")
     .description("Download building sprite")
     .requiredOption("-i, --image-name <name>", "Building image name (e.g. 10552_hatchery6reskinart_building)")
     .option("-q, --quality <quality>", "Sprite quality (normal | large)", "normal")

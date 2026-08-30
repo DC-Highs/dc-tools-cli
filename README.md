@@ -24,7 +24,7 @@ A powerful, modular Command Line Interface (CLI) for downloading **Dragon City**
 - 📦 **Asset Downloader**: Download dragon sprites, thumbnails, SWF Flash animations, Spine 2D animations, building sprites, habitat sprites, decorations, chests, island packages, and background music.
 - 🐉 **All-In-One Dragon Downloader**: Download all assets across every dragon growth phase (`phase0` through `phase3`) with a single command.
 - 🌐 **Localization & Translation Engine**: Query translations across 10 supported languages (`en`, `pt`, `es`, `fr`, `de`, `it`, `ja`, `ru`, `ko`, `tr`), lookup keys/values, fetch dragon names/descriptions by ID, and run interactive paginated searches in the terminal.
-- 🔍 **URL Metadata Extractor**: Instantly parse asset URLs (`dragon-sprite`, `dragon-thumbnail`, `dragon-flash`, `dragon-spine`) to extract dragon ID, image name, phase, quality, skin, and platform prefix (`dci`, `dca`, `dcm`).
+- 🔍 **URL Metadata Extractor**: Instantly parse asset URLs (`dragon:sprite`, `dragon:thumbnail`, `dragon-animation:flash`, `dragon-animation:spine`) to extract dragon ID, image name, phase, quality, skin, and platform prefix (`dci`, `dca`, `dcm`).
 - ⚙️ **Game Configuration Manager**: Retrieve authenticated or raw game configuration data directly from Dragon City servers.
 
 ---
@@ -55,15 +55,15 @@ dc-tools-cli
 
 ### 📥 1. Downloading Game Assets (`download`)
 
-#### Download All Dragon Assets (`dragon-all`)
+#### Download All Dragon Assets (`dragon:all`)
 Downloads all sprites, thumbnails, Flash animations, and Spine 2D animations across all growth phases (`phase0` to `phase3`) for a dragon:
 
 ```bash
 # Using positional argument
-dc-tools-cli download dragon-all 1000_dragon_nature
+dc-tools-cli download dragon:all 1000_dragon_nature
 
 # Using flags and specifying platform/output directory
-dc-tools-cli download dragon-all -i 1000_dragon_nature --platform dci -o ./my-dragons
+dc-tools-cli download dragon:all -i 1000_dragon_nature --platform dci -o ./my-dragons
 ```
 
 #### Individual Dragon Assets
@@ -71,32 +71,32 @@ Supports positional arguments or `-i, --image-name` flags, along with platform f
 
 ```bash
 # Dragon Sprite
-dc-tools-cli download dragon-sprite 1000_dragon_nature --phase 3 --platform dci
+dc-tools-cli download dragon:sprite 1000_dragon_nature --phase 3 --platform dci
 
 # Dragon Thumbnail
-dc-tools-cli download dragon-thumbnail 1000_dragon_nature --phase 3
+dc-tools-cli download dragon:thumbnail 1000_dragon_nature --phase 3
 
 # Dragon Flash Animation (.swf)
-dc-tools-cli download dragon-flash 1000_dragon_nature --phase 3
+dc-tools-cli download dragon-animation:flash 1000_dragon_nature --phase 3
 
 # Dragon Spine 2D Animation (.zip)
-dc-tools-cli download dragon-spine 1000_dragon_nature --phase 3
+dc-tools-cli download dragon-animation:spine 1000_dragon_nature --phase 3
 ```
 
 #### Buildings, Habitats, Decorations & Chests
 
 ```bash
 # Building Sprite
-dc-tools-cli download building-sprite -i building_hatching_boost
+dc-tools-cli download building:sprite -i building_hatching_boost
 
 # Habitat Sprite
-dc-tools-cli download habitat-sprite -i habitat_nature_1
+dc-tools-cli download habitat:sprite -i habitat_nature_1
 
 # Decoration Sprite
-dc-tools-cli download decoration-sprite -i deco_flower_red
+dc-tools-cli download decoration:sprite -i deco_flower_red
 
 # Chest Sprite
-dc-tools-cli download chest-sprite -i chest_gold_01
+dc-tools-cli download chest:sprite -i chest_gold_01
 
 # Island Content Package (.zip)
 dc-tools-cli download island-package -f heroicraces_islands_package -t heroicraces_islands
@@ -155,7 +155,7 @@ Parse static asset URLs to extract structured dragon metadata (ID, Image Name, P
 
 #### Extract Dragon Sprite Metadata
 ```bash
-dc-tools-cli extract dragon-sprite "https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_3@2x.png"
+dc-tools-cli extract dragon:sprite "https://dci-static-s1.socialpointgames.com/static/dragoncity/mobile/ui/dragons/ui_1000_dragon_nature_3@2x.png"
 ```
 **Terminal Output:**
 ```text
@@ -170,9 +170,9 @@ dc-tools-cli extract dragon-sprite "https://dci-static-s1.socialpointgames.com/s
 
 #### Extract Dragon Thumbnail, Flash & Spine
 ```bash
-dc-tools-cli extract dragon-thumbnail <url>
-dc-tools-cli extract dragon-flash <url>
-dc-tools-cli extract dragon-spine <url>
+dc-tools-cli extract dragon:thumbnail <url>
+dc-tools-cli extract dragon-animation:flash <url>
+dc-tools-cli extract dragon-animation:spine <url>
 ```
 
 ---
@@ -210,7 +210,7 @@ cd dc-tools-cli
 npm install
 
 # Run in development mode
-npm run dev -- download dragon-all 1000_dragon_nature
+npm run dev -- download dragon:all 1000_dragon_nature
 
 # Run unit tests
 npm run test

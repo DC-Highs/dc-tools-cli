@@ -4,8 +4,7 @@ import { DragonStaticFileUrlParser } from "@dchighs/dc-core"
 
 import { formatExtractedMetadata, logCard, logError } from "../../helpers/logger.js"
 
-export const extractDragonThumbnailCommand = new Command("dragon-thumbnail")
-    .alias("d-thumbnail")
+export const extractDragonThumbnailCommand = new Command("dragon:thumbnail")
     .description("Extract data from a dragon thumbnail URL")
     .argument("<url>", "Dragon thumbnail URL")
     .action((url: string) => {

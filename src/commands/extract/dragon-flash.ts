@@ -4,7 +4,7 @@ import { DragonStaticFileUrlParser } from "@dchighs/dc-core"
 
 import { formatExtractedMetadata, logCard, logError } from "../../helpers/logger.js"
 
-export const extractDragonFlashCommand = new Command("dragon-flash")
+export const extractDragonFlashCommand = new Command("dragon-animation:flash")
     .description("Extract data from a dragon flash animation URL")
     .argument("<url>", "Dragon flash animation URL")
     .action((url: string) => {

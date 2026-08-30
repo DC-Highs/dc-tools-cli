@@ -6,7 +6,7 @@ import { DragonPhase } from "@dchighs/dc-core"
 import { ensureDirectory } from "../../helpers/fs.js"
 import { logError, logSuccess } from "../../helpers/logger.js"
 
-export const dragonSpineCommand = new Command("dragon-spine")
+export const dragonSpineCommand = new Command("dragon-animation:spine")
     .description("Download dragon spine animation (.zip)")
     .argument("[imageName]", "Dragon image name (e.g. 1000_dragon_nature)")
     .option("-i, --image-name <name>", "Dragon image name")

@@ -6,7 +6,7 @@ import { DragonPhase, DragonSpriteQuality } from "@dchighs/dc-core"
 import { ensureDirectory } from "../../helpers/fs.js"
 import { logError, logSuccess } from "../../helpers/logger.js"
 
-export const dragonSpriteCommand = new Command("dragon-sprite")
+export const dragonSpriteCommand = new Command("dragon:sprite")
     .description("Download dragon sprite")
     .argument("[imageName]", "Dragon image name (e.g. 1000_dragon_nature)")
     .option("-i, --image-name <name>", "Dragon image name")

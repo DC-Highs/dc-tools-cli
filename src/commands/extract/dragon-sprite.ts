@@ -4,8 +4,7 @@ import { DragonStaticFileUrlParser } from "@dchighs/dc-core"
 
 import { formatExtractedMetadata, logCard, logError } from "../../helpers/logger.js"
 
-export const extractDragonSpriteCommand = new Command("dragon-sprite")
-    .alias("d-sprite")
+export const extractDragonSpriteCommand = new Command("dragon:sprite")
     .description("Extract data from a dragon sprite URL")
     .argument("<url>", "Dragon sprite URL")
     .action((url: string) => {

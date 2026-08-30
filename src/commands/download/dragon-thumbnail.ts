@@ -6,7 +6,7 @@ import { DragonPhase } from "@dchighs/dc-core"
 import { ensureDirectory } from "../../helpers/fs.js"
 import { logError, logSuccess } from "../../helpers/logger.js"
 
-export const dragonThumbnailCommand = new Command("dragon-thumbnail")
+export const dragonThumbnailCommand = new Command("dragon:thumbnail")
     .description("Download dragon thumbnail")
     .argument("[imageName]", "Dragon image name (e.g. 1000_dragon_nature)")
     .option("-i, --image-name <name>", "Dragon image name")
