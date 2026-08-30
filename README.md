@@ -29,16 +29,43 @@ A powerful, modular Command Line Interface (CLI) for downloading **Dragon City**
 
 ---
 
-## 📦 Installation
+## 📦 Installation & Execution Methods
+
+Choose the execution method that best fits your workflow:
+
+### 🚀 Option 1: Execute via `npx` (No Installation Needed)
+Run commands instantly using `npx` without installing any global packages:
+
+```bash
+npx @dchighs/dc-tools-cli download dragon:all 1000_dragon_nature
+```
+
+---
+
+### 💻 Option 2: Install Globally via `npm`
+Install `@dchighs/dc-tools-cli` globally on your machine to use the `dc-tools-cli` binary command anywhere:
 
 ```bash
 npm install -g @dchighs/dc-tools-cli
+
+# Run anywhere in your terminal:
+dc-tools-cli --help
 ```
 
-Or execute directly using `npx`:
+---
 
-```bash
-npx @dchighs/dc-tools-cli --help
+### 💾 Option 3: Standalone Executable Release (No Node.js Required)
+Download standalone compiled executables for Windows, Linux, or macOS directly from the [GitHub Releases](https://github.com/DC-Highs/dc-tools-cli/releases) page:
+
+- **Windows**: Download `index-win.exe` (or `dc-tools-cli-win.exe`)
+- **Linux**: Download `index-linux`
+- **macOS**: Download `index-macos`
+
+Run directly in your command line:
+
+```powershell
+# Windows PowerShell example
+.\index-win.exe download dragon:all 1000_dragon_nature
 ```
 
 ---
@@ -199,7 +226,7 @@ dc-tools-cli config fetch \
 
 ---
 
-## 🛠️ Development & Testing
+## 🛠️ Development & Building Standalone Executables
 
 ```bash
 # Clone the repository
@@ -217,6 +244,9 @@ npm run test
 
 # Build TypeScript output
 npm run build
+
+# Build standalone executables for Windows, Linux, and macOS (outputs to ./release/)
+npm run build:exe
 
 # Format codebase
 npm run format
