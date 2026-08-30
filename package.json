@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DC-Highs/dc-tools-cli.git"
+    "url": "git+https://github.com/DC-Highs/dc-tools-cli.git"
   },
   "homepage": "https://github.com/DC-Highs/dc-tools-cli#readme",
   "bugs": {
@@ -27,6 +27,7 @@
     "dev": "tsx ./src/index.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
+    "prepublishOnly": "npm run build && vitest run",
     "test": "vitest",
     "test:cov": "vitest run --coverage"
   },
