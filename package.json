@@ -1,6 +1,6 @@
 {
   "name": "@dchighs/dc-tools-cli",
-  "description": "",
+  "description": "CLI tools for Dragon City assets, localization, and configuration",
   "version": "0.1.0",
   "type": "commonjs",
   "repository": {

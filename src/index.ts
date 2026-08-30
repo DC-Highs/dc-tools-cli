@@ -1,5 +1,6 @@
 import { Command } from "commander"
 
+import { description, name, version } from "../package.json"
 import { configCommand } from "./commands/config/index.js"
 import { downloadCommand } from "./commands/download/index.js"
 import { extractCommand } from "./commands/extract/index.js"
@@ -9,11 +10,7 @@ import { CLI_BANNER } from "./helpers/banner.js"
 export function createProgram(): Command {
     const program = new Command()
 
-    program
-        .name("dc-tools-cli")
-        .version("0.1.0")
-        .description("CLI tools for Dragon City assets, localization, and configuration")
-        .addHelpText("before", CLI_BANNER)
+    program.name(name).version(version).description(description).addHelpText("before", CLI_BANNER)
 
     program.addCommand(downloadCommand)
     program.addCommand(extractCommand)
