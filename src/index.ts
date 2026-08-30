@@ -3,6 +3,7 @@ import { Command } from "commander"
 
 import { description, name, version } from "../package.json"
 import { configCommand } from "./commands/config/index.js"
+import { dcClientCommand } from "./commands/dc-client/index.js"
 import { downloadCommand } from "./commands/download/index.js"
 import { extractCommand } from "./commands/extract/index.js"
 import { localizationCommand } from "./commands/localization/index.js"
@@ -17,6 +18,7 @@ export function createProgram(): Command {
     program.addCommand(extractCommand)
     program.addCommand(localizationCommand)
     program.addCommand(configCommand)
+    program.addCommand(dcClientCommand)
 
     return program
 }

@@ -12,6 +12,7 @@ describe("CLI Commands Structure", () => {
         expect(commands).toContain("extract")
         expect(commands).toContain("localization")
         expect(commands).toContain("config")
+        expect(commands).toContain("dc-client")
     })
 
     it("should extract dragon sprite URL correctly", () => {

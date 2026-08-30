@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@dchighs/dc-assets": "^0.4.3",
+    "@dchighs/dc-client-state": "^0.1.0",
     "@dchighs/dc-config": "^0.1.122",
     "@dchighs/dc-core": "^0.4.2",
     "@dchighs/dc-localization": "^0.0.7",
