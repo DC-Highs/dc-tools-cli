@@ -1,6 +1,6 @@
 # @dchighs/dc-tools-cli
 
-A powerful, modular Command Line Interface (CLI) for downloading **Dragon City** game assets, searching localizations/translations, parsing asset metadata from URLs, and fetching game configurations.
+A powerful, modular Command Line Interface (CLI) for downloading **Dragon City** game assets, searching localizations/translations, managing local client state & cached assets, parsing asset metadata from URLs, and fetching game configurations.
 
 ```
 ╭──────────────────────────────────────────────────────────────────────╮
@@ -12,7 +12,7 @@ A powerful, modular Command Line Interface (CLI) for downloading **Dragon City**
 │   ██████╔╝ ╚██████╗     ██║   ╚██████╔╝╚██████╔╝███████╗███████║     │
 │   ╚═════╝   ╚═════╝     ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝     │
 │                                                                      │
-│   by DC HIGHS v0.1.0 • @dchighs/dc-tools-cli                         │
+│   by DC HIGHS v0.2.0 • @dchighs/dc-tools-cli                         │
 │                                                                      │
 ╰──────────────────────────────────────────────────────────────────────╯
 ```
@@ -23,6 +23,7 @@ A powerful, modular Command Line Interface (CLI) for downloading **Dragon City**
 
 - 📦 **Asset Downloader**: Download dragon sprites, thumbnails, SWF Flash animations, Spine 2D animations, building sprites, habitat sprites, decorations, chests, island packages, and background music.
 - 🐉 **All-In-One Dragon Downloader**: Download all assets across every dragon growth phase (`phase0` through `phase3`) with a single command.
+- 🎮 **Local Client & Asset Manager (`dc-client`)**: Discover client data directory paths, list/filter/substitute cached assets with interactive terminal pagination, and manage type-safe game preferences (or raw `UserDefault.xml`).
 - 🌐 **Localization & Translation Engine**: Query translations across 10 supported languages (`en`, `pt`, `es`, `fr`, `de`, `it`, `ja`, `ru`, `ko`, `tr`), lookup keys/values, fetch dragon names/descriptions by ID, and run interactive paginated searches in the terminal.
 - 🔍 **URL Metadata Extractor**: Instantly parse asset URLs (`dragon:sprite`, `dragon:thumbnail`, `dragon-animation:flash`, `dragon-animation:spine`) to extract dragon ID, image name, phase, quality, skin, and platform prefix (`dci`, `dca`, `dcm`).
 - ⚙️ **Game Configuration Manager**: Retrieve authenticated or raw game configuration data directly from Dragon City servers.
@@ -225,6 +226,64 @@ dc-tools-cli config fetch \
 ```
 
 ---
+
+### 🎮 5. Local Dragon City Client Management (`dc-client`)
+
+Manage local client data directories, cached assets, and preferences for the installed Dragon City Windows client.
+
+#### Get Client Data Directory Path
+Get the absolute path to the local Dragon City client storage directory:
+```bash
+dc-tools-cli dc-client get-dir-path
+```
+
+#### List Cached Assets (`dc-client assets list`)
+List files in the local cache with support for asset type filtering (`-t, --type image audio texture mask binary`), pagination (`-p, --page`, `-l, --limit`), unpaginated view (`-a, --all`), and interactive prompt navigation:
+
+```bash
+# Interactive paginated list
+dc-tools-cli dc-client assets list
+
+# Filter by type (image, audio, texture, mask, binary)
+dc-tools-cli dc-client assets list -t image audio
+
+# Specific page and custom limit
+dc-tools-cli dc-client assets list -p 2 -l 15
+
+# View all files without pagination
+dc-tools-cli dc-client assets list --all
+```
+
+#### Manage Local Assets (`dc-client assets`)
+```bash
+# Substitute a cached asset with a custom local file
+dc-tools-cli dc-client assets set -k "ui_1000_dragon_nature_3@2x.png" -i "./my_custom_sprite.png"
+
+# Get absolute path of a cached file
+dc-tools-cli dc-client assets get-file-path -f "ui_1000_dragon_nature_3@2x.png"
+
+# Delete a specific cached asset file
+dc-tools-cli dc-client assets delete -f "ui_1000_dragon_nature_3@2x.png"
+
+# Clear all files in the assets cache
+dc-tools-cli dc-client assets clear
+```
+
+#### Manage Game Preferences (`dc-client preferences` & `dc-client user-default`)
+```bash
+# High-level preference helpers
+dc-tools-cli dc-client preferences disable-music
+dc-tools-cli dc-client preferences get-user-id
+dc-tools-cli dc-client preferences set-farm-crops --plant-id 1
+
+# Low-level UserDefault.xml access
+dc-tools-cli dc-client user-default get -k "MUSIC_OFF"
+dc-tools-cli dc-client user-default set -k "MUSIC_OFF" -v "1"
+dc-tools-cli dc-client user-default delete -k "SOME_KEY"
+```
+
+---
+
 
 ## 🛠️ Development & Building Standalone Executables
 
