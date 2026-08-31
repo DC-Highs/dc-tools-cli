@@ -1,11 +1,38 @@
-import { ClientState } from "@dchighs/dc-client-state"
+import { AssetType, ClientState } from "@dchighs/dc-client-state"
 import { Command } from "commander"
 
-import { logError, logSuccess } from "../../helpers/logger.js"
+import { logError, logPaginatedArray, logSuccess } from "../../helpers/logger.js"
 
 export const assetsCommand = new Command("assets").description(
     "Manage local Dragon City cached assets",
 )
+
+assetsCommand
+    .command("list")
+    .description("List cached assets from local storage")
+    .option(
+        "-t, --type <types...>",
+        "Filter assets by type (image, audio, texture, mask, binary)",
+    )
+    .option("-p, --page <page>", "Page number to view (1-indexed)", (val) => parseInt(val, 10))
+    .option("-l, --limit <limit>", "Number of assets per page", (val) => parseInt(val, 10))
+    .option("-a, --all", "Display all assets without pagination")
+    .action(async (options) => {
+        try {
+            const client = new ClientState()
+            const types = options.type as AssetType[] | undefined
+            const assets = await client.assets.listAssets(types)
+
+            await logPaginatedArray("Cached Assets", assets, {
+                page: options.page,
+                limit: options.limit,
+                all: options.all,
+            })
+        } catch (error) {
+            logError("Failed to list cached assets", error)
+        }
+    })
+
 
 assetsCommand
     .command("set")
@@ -62,3 +89,4 @@ assetsCommand
             logError("Failed to clear assets cache", error)
         }
     })
+

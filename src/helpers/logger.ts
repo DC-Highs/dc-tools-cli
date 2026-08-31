@@ -228,3 +228,109 @@ export async function logSearchResults(
         rl.close()
     }
 }
+
+export async function logPaginatedArray(
+    title: string,
+    items: string[],
+    options: {
+        page?: number
+        limit?: number
+        all?: boolean
+    } = {},
+): Promise<void> {
+    if (items.length === 0) {
+        logInfo("No items found")
+        return
+    }
+
+    if (options.all) {
+        logSuccess(`${title} (${items.length} total):`)
+        for (const item of items) {
+            console.log(`  ${GRAY}•${RESET} ${item}`)
+        }
+        return
+    }
+
+    const pageSize = options.limit && options.limit > 0 ? options.limit : 20
+    const totalPages = Math.ceil(items.length / pageSize)
+    const isInteractive = Boolean(process.stdout.isTTY && process.stdin.isTTY)
+
+    if (options.page !== undefined || !isInteractive || totalPages <= 1) {
+        const pageNum = Math.min(Math.max(options.page || 1, 1), totalPages)
+        const startIndex = (pageNum - 1) * pageSize
+        const endIndex = Math.min(startIndex + pageSize, items.length)
+        const pageItems = items.slice(startIndex, endIndex)
+
+        console.log(
+            `\n  ${BOLD}${GOLD}📦 ${title}${RESET} ${GRAY}(Page ${pageNum}/${totalPages} • Items ${startIndex + 1}-${endIndex} of ${items.length})${RESET}\n`,
+        )
+        for (const item of pageItems) {
+            console.log(`    ${GRAY}•${RESET} ${item}`)
+        }
+        console.log()
+
+        if (totalPages > 1 && options.page === undefined && !isInteractive) {
+            console.log(
+                `  ${GRAY}Use -p <page> or --all to view other items (Total pages: ${totalPages}).${RESET}\n`,
+            )
+        }
+        return
+    }
+
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    })
+
+    const askQuestion = (queryText: string): Promise<string> =>
+        new Promise((resolve) => rl.question(queryText, resolve))
+
+    let currentPage = Math.min(Math.max(options.page || 1, 1), totalPages)
+
+    try {
+        while (true) {
+            const startIndex = (currentPage - 1) * pageSize
+            const endIndex = Math.min(startIndex + pageSize, items.length)
+            const pageItems = items.slice(startIndex, endIndex)
+
+            console.log(
+                `\n  ${BOLD}${GOLD}📦 ${title}${RESET} ${GRAY}(Page ${currentPage}/${totalPages} • Items ${startIndex + 1}-${endIndex} of ${items.length})${RESET}\n`,
+            )
+            for (const item of pageItems) {
+                console.log(`    ${GRAY}•${RESET} ${item}`)
+            }
+            console.log()
+
+            const prompt = `  ${GRAY}Page ${currentPage}/${totalPages} [Press Enter/'n': Next | 'p': Prev | 'q': Quit | Or enter page number]: ${RESET}`
+            const answer = await askQuestion(prompt)
+            const choice = answer.trim().toLowerCase()
+
+            if (choice === "q" || choice === "exit") {
+                break
+            } else if (choice === "p" || choice === "b") {
+                if (currentPage > 1) {
+                    currentPage--
+                } else {
+                    console.log(`  ${GRAY}Already on the first page.${RESET}`)
+                }
+            } else if (!isNaN(Number(choice)) && Number(choice) > 0) {
+                const targetPage = Number(choice)
+                if (targetPage <= totalPages) {
+                    currentPage = targetPage
+                } else {
+                    console.log(`  ${GRAY}Page number exceeds maximum page (${totalPages}).${RESET}`)
+                }
+            } else {
+                if (currentPage < totalPages) {
+                    currentPage++
+                } else {
+                    console.log(`  ${GRAY}Reached the end of items.${RESET}`)
+                    break
+                }
+            }
+        }
+    } finally {
+        rl.close()
+    }
+}
+
